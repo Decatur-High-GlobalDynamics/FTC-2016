@@ -33,7 +33,6 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
-
 /**
  * Register Op Modes
  */
@@ -58,14 +57,11 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("NullOp", NullOp.class);
 
     //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);
-    manager.register ("4243 Tele Op", ArcadeTeleOp4232.class);
-    manager.register ("6173 Tele Op", ArcadeTeleOp6173.class);
-    manager.register ("yeah, we have an autonomous", MoronicAuto.class);
-
-    /*
-     * Uncomment any of the following lines if you want to register an op mode.
-     */
-    manager.register("MR Gyro Test", MRGyroTest.class);
+    manager.register("Arcade Drive", ArcadeTeleOp.class);
+    manager.register("Not actually specified auto", ArcadeTeleOp.class);
+    //manager.register("Record", RecordAuto.class);
+    //manager.register("Playback", PlaybackAuto.class);
+    manager.register("Oh dear god", MoronicAuto.class);
 
     //manager.register("AdafruitRGBExample", AdafruitRGBExample.class);
     //manager.register("ColorSensorDriver", ColorSensorDriver.class);

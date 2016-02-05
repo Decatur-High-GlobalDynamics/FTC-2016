@@ -8,33 +8,34 @@ import com.qualcomm.robotcore.util.Range;
 public class MoronicAuto extends OpMode {
 
 
-    DcMotor driveRight;
-    DcMotor driveLeft;
-    DcMotor driveLeft2;
-    DcMotor driveRight2;
-    /**
-     * Constructor
-     */
+    DcMotor right;
+    DcMotor left;
+    DcMotor winch;
+    DcMotor tape;
+    Servo tapeAngle;
+    Servo flipper;
+    int winchCount=0;
+    int i = 0;
+    int x = 0;
+    double tapeMatchWinchSpeed=0.213;
+
     public MoronicAuto() {
 
     }
 
-    /*
-     * Code to run when the op mode is first enabled goes here
-     *
-     * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#start()
-     */
     @Override
     public void init() {
-        driveLeft = hardwareMap.dcMotor.get("left_back");
-        driveLeft2 = hardwareMap.dcMotor.get("left_front");
-        driveLeft.setDirection(DcMotor.Direction.REVERSE);
-        driveLeft2.setDirection(DcMotor.Direction.REVERSE);
 
-        driveRight = hardwareMap.dcMotor.get("right_back");
-        driveRight2 = hardwareMap.dcMotor.get("right_front");
-        driveRight.setDirection(DcMotor.Direction.FORWARD);
-        driveRight2.setDirection(DcMotor.Direction.FORWARD);
+        right = hardwareMap.dcMotor.get("left_motor");
+        left = hardwareMap.dcMotor.get("right_motor");
+        winch = hardwareMap.dcMotor.get("winch_motor");
+        tape = hardwareMap.dcMotor.get("tape_motor");
+        tapeAngle=hardwareMap.servo.get("tapeAngle");
+        flipper=hardwareMap.servo.get("flipper");
+        left.setDirection(DcMotor.Direction.REVERSE);
+        tape.setDirection(DcMotor.Direction.REVERSE);
+        flipper.setPosition(1);
+        tapeAngle.setPosition(0.1);
     }
 
     @Override
@@ -43,18 +44,38 @@ public class MoronicAuto extends OpMode {
         {
             stop();
         }
-        else if (getRuntime()>28)
+        else
         {
-            driveRight.setPower(0.5);
-            driveLeft.setPower(-0.5);
-            driveLeft2.setPower(-0.5);
-            driveRight2.setPower(0.5);
+            if (getRuntime()>28)
+            {
+                flipper.setPosition(0.5);
+            }
+/*
+            if (getRuntime() > 10 && getRuntime() < 15)
+            {
+                left.setPower(1);
+                right.setPower(1);
+            }
+            else
+            {
+                left.setPower(0);
+                right.setPower(0);
+            }
+            if (getRuntime() > 15 && getRuntime() < 17)
+            {
+                flipper.setPosition(0);
+            }
+            if (getRuntime()>17)
+            {
+                flipper.setPosition(1);
+            }
+*/
         }
     }
 
     @Override
     public void stop() {
-        telemetry.addData("stop", "");
+
     }
 
     /*
